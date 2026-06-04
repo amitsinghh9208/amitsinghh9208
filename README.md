@@ -102,8 +102,7 @@ ETL Validation • Data Mapping • Financial Systems Testing • Risk-Based QA
 
 ---
 
-## 📫 Contact  
-📧 Email: amitsinghh9208@gmail.com  
+## 📫 Contact
 🔗 LinkedIn: https://linkedin.com/in/amitsinghfinance999  
 
 ---
