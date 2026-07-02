@@ -23,6 +23,97 @@
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=2">
     <meta name="description" content="My travel adventures and favorite destinations around the world.">
+    <style>
+      /* Session Booking Section */
+      .session-booking {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 60px 20px;
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      .booking-container {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .booking-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      .session-booking h2 {
+        color: white;
+        font-size: 32px;
+        margin: 20px 0;
+        font-weight: 700;
+      }
+
+      .session-booking p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+
+      .booking-btn {
+        display: inline-block;
+        background: white;
+        color: #667eea;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+
+      .booking-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        background: #f0f0f0;
+      }
+
+      .booking-btn::after {
+        content: 'Unlock Premium Insights — ₹199';
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .booking-btn:hover::after {
+        opacity: 1;
+      }
+
+      @media (max-width: 768px) {
+        .session-booking {
+          padding: 40px 20px;
+        }
+
+        .session-booking h2 {
+          font-size: 24px;
+        }
+
+        .booking-icon {
+          font-size: 36px;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Navbar -->
@@ -43,6 +134,9 @@
           </li>
           <li>
             <a href="index.html#projects">Projects</a>
+          </li>
+          <li>
+            <a href="blog.html">Blog</a>
           </li>
           <li>
             <a href="travel.html" class="active">Travel</a>
@@ -119,24 +213,34 @@
       <div class="stories-container">
         <div class="story" data-aos="fade-right">
           <h3>Mountain Exploration</h3>
-          <p>One of our most memorable adventures was hiking through scenic mountain ranges. The breathtaking views and quality time with family made it an unforgettable experience. We explored hidden trails and discovered stunning vistas at every turn.</p>
+          <p>One of our most memorable adventures was hiking through scenic mountain ranges. The breathtaking views and quality time with family made it an unforgettable experience. We explored h[...]
           <span class="story-tag">#hiking #mountains #adventure</span>
         </div>
         <div class="story" data-aos="fade-left">
           <h3>Wildlife Encounters</h3>
-          <p>Swimming with dolphins and observing marine life in their natural habitat was a dream come true. These interactions taught us valuable lessons about conservation and the importance of protecting our oceans and marine ecosystems.</p>
+          <p>Swimming with dolphins and observing marine life in their natural habitat was a dream come true. These interactions taught us valuable lessons about conservation and the importance o[...]
           <span class="story-tag">#wildlife #marine #conservation</span>
         </div>
         <div class="story" data-aos="fade-right">
           <h3>Cruise Adventures</h3>
-          <p>Our cruise vacation was a perfect blend of relaxation and adventure. From onboard entertainment to port explorations, every moment was special. We created memories that will last a lifetime aboard these magnificent ships.</p>
+          <p>Our cruise vacation was a perfect blend of relaxation and adventure. From onboard entertainment to port explorations, every moment was special. We created memories that will last a l[...]
           <span class="story-tag">#cruise #travel #family</span>
         </div>
         <div class="story" data-aos="fade-left">
           <h3>Cultural Immersion</h3>
-          <p>Exploring historic cities and immersing ourselves in different cultures has broadened our perspectives. We've learned about diverse traditions, tasted authentic cuisines, and made connections with people from around the world.</p>
+          <p>Exploring historic cities and immersing ourselves in different cultures has broadened our perspectives. We've learned about diverse traditions, tasted authentic cuisines, and made co[...]
           <span class="story-tag">#culture #exploration #worldtravel</span>
         </div>
+      </div>
+    </section>
+
+    <!-- Session Booking Section -->
+    <section class="session-booking" data-aos="fade-up">
+      <div class="booking-container">
+        <div class="booking-icon">📅</div>
+        <h2>Let's Meet — Reserve Your Session Now</h2>
+        <p>Book a premium consultation session to discuss your adventures and travel experiences.</p>
+        <a href="https://checkout.razorpay.com/" target="_blank" class="booking-btn">Book Now</a>
       </div>
     </section>
 
