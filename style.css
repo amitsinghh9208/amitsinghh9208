@@ -100,6 +100,30 @@ nav a.active {
   padding: 20px;
 }
 
+/* Blog Hero */
+.blog-hero {
+  height: 50vh;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.blog-hero h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.blog-hero p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  max-width: 600px;
+}
+
 /* Travel Hero */
 .travel-hero {
   height: 60vh;
@@ -168,6 +192,9 @@ nav a.active {
   text-decoration: none;
   transition: 0.3s ease;
   display: inline-block;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .primary {
@@ -178,6 +205,7 @@ nav a.active {
 .secondary {
   border: 2px solid var(--secondary);
   color: var(--secondary);
+  background: transparent;
 }
 
 .primary:hover {
@@ -200,6 +228,201 @@ section h2 {
   font-size: 40px;
   margin-bottom: 30px;
   color: var(--primary);
+}
+
+/* Blog Editor */
+.blog-editor {
+  background: var(--card);
+  border-radius: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-field,
+.textarea-field {
+  padding: 14px;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.input-field::placeholder,
+.textarea-field::placeholder {
+  color: var(--muted);
+}
+
+.textarea-field {
+  resize: vertical;
+  min-height: 200px;
+}
+
+.editor-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Admin Controls */
+.admin-controls {
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 15px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Blog Posts */
+.blog-posts {
+  padding: 60px 20px;
+}
+
+.posts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-card {
+  background: var(--card);
+  border-radius: 15px;
+  padding: 25px;
+  transition: 0.3s ease;
+  border-left: 5px solid var(--secondary);
+  cursor: pointer;
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card h3 {
+  color: var(--primary);
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.blog-card .category {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.blog-card .excerpt {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.blog-card .meta {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-top: 50px;
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: var(--card);
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close {
+  color: var(--text);
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--secondary);
+}
+
+.modal-content h1 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.modal-content .category {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.modal-content .modal-meta {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.modal-content .post-body {
+  line-height: 1.8;
+  color: var(--text);
+  text-align: left;
 }
 
 /* Skills */
@@ -359,6 +582,8 @@ form textarea {
   border: none;
   border-radius: 10px;
   outline: none;
+  background: var(--card);
+  color: var(--text);
 }
 
 form textarea {
@@ -381,6 +606,10 @@ form textarea {
     font-size: 40px;
   }
 
+  .blog-hero h1 {
+    font-size: 35px;
+  }
+
   .travel-hero h1 {
     font-size: 40px;
   }
@@ -396,6 +625,19 @@ form textarea {
 
   .stories-container {
     grid-template-columns: 1fr;
+  }
+
+  .posts-container {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    margin: 20px;
+    padding: 25px;
+  }
+
+  .editor-container {
+    padding: 20px;
   }
 }
 
