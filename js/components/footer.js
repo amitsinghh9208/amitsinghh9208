@@ -86,7 +86,7 @@ class FooterComponent extends HTMLElement {
           </div>
           <div class="copyright">
             <p>&copy; ${currentYear} Amit Singh. All rights reserved.</p>
-            <p>Built with ❤️ using modern web technologies</p>
+            <p>Built with ❤️ by singhamit-technologies</p>
           </div>
         </div>
       </footer>
