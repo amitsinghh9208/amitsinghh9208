@@ -4,17 +4,19 @@
  */
 
 class AboutSection extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
+    constructor() {
+        super();
+        this.attachShadow({
+            mode: 'open'
+        });
+    }
 
-  connectedCallback() {
-    this.render();
-  }
+    connectedCallback() {
+        this.render();
+    }
 
-  render() {
-    const template = `
+    render() {
+        const template = `
       <style>
         :host {
           --primary-color: #667eea;
@@ -63,7 +65,7 @@ class AboutSection extends HTMLElement {
         }
       </style>
 
-      <section id="about" data-aos="fade-right">
+      <section id="about" class="section-card" data-aos="fade-right">
         <h2>About Me</h2>
         <div class="about-content">
           <p>
@@ -84,8 +86,8 @@ class AboutSection extends HTMLElement {
       </section>
     `;
 
-    this.shadowRoot.innerHTML = template;
-  }
+        this.shadowRoot.innerHTML = template;
+    }
 }
 
 customElements.define('about-section', AboutSection);
