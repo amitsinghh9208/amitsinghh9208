@@ -4,18 +4,20 @@
  */
 
 class FooterComponent extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
+    constructor() {
+        super();
+        this.attachShadow({
+            mode: 'open'
+        });
+    }
 
-  connectedCallback() {
-    this.render();
-  }
+    connectedCallback() {
+        this.render();
+    }
 
-  render() {
-    const currentYear = new Date().getFullYear();
-    const template = `
+    render() {
+        const currentYear = new Date().getFullYear();
+        const template = `
       <style>
         :host {
           --primary-color: #667eea;
@@ -92,8 +94,8 @@ class FooterComponent extends HTMLElement {
       </footer>
     `;
 
-    this.shadowRoot.innerHTML = template;
-  }
+        this.shadowRoot.innerHTML = template;
+    }
 }
 
 customElements.define('footer-component', FooterComponent);
