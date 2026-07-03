@@ -4,24 +4,26 @@
  */
 
 class ProjectsSection extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
+    constructor() {
+        super();
+        this.attachShadow({
+            mode: 'open'
+        });
+    }
 
-  connectedCallback() {
-    this.render();
-  }
+    connectedCallback() {
+        this.render();
+    }
 
-  render() {
-    const projectsHTML = CONSTANTS.PROJECTS.map(project => `
-      <div class="project">
-        <h3>${Sanitizer.escapeSpecialChars(project.title)}</h3>
-        <p>${Sanitizer.escapeSpecialChars(project.description)}</p>
+    render() {
+        const projectsHTML = CONSTANTS.PROJECTS.map(project => `
+      <div class="project-card">
+        <h4>${project.title}</h4>
+        <p>${project.description}</p>
       </div>
     `).join('');
 
-    const template = `
+        const template = `
       <style>
         :host {
           --primary-color: #667eea;
@@ -88,7 +90,7 @@ class ProjectsSection extends HTMLElement {
         }
       </style>
 
-      <section id="projects" data-aos="fade-up">
+      <section id="projects" class="section-card" data-aos="zoom-in" data-aos-delay="200">
         <h2>Featured Projects</h2>
         <div class="projects-container">
           ${projectsHTML}
@@ -96,8 +98,8 @@ class ProjectsSection extends HTMLElement {
       </section>
     `;
 
-    this.shadowRoot.innerHTML = template;
-  }
+        this.shadowRoot.innerHTML = template;
+    }
 }
 
 customElements.define('projects-section', ProjectsSection);
