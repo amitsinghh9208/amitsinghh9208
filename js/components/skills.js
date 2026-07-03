@@ -1,65 +1,53 @@
 /**
- * Skills Section Component
- * Displays technical skills as tags
+ * About Section Component
+ * Displays information about Amit Singh
  */
 
-class SkillsSection extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-  }
+class AboutSection extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({
+            mode: 'open'
+        });
+    }
 
-  connectedCallback() {
-    this.render();
-  }
+    connectedCallback() {
+        this.render();
+    }
 
-  render() {
-    const skillsHTML = CONSTANTS.SKILLS.map(skill => 
-      `<span class="skill-tag">${Sanitizer.escapeSpecialChars(skill)}</span>`
-    ).join('');
-
-    const template = `
+    render() {
+        const template = `
       <style>
         :host {
           --primary-color: #667eea;
-          --secondary-color: #764ba2;
         }
 
         section {
           padding: 6rem 2rem;
           max-width: 1000px;
           margin: 0 auto;
-          background: #f9f9f9;
         }
 
         h2 {
           font-size: 2.5rem;
-          margin-bottom: 3rem;
+          margin-bottom: 2rem;
           color: var(--primary-color);
           text-align: center;
         }
 
-        .skills-container {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          justify-content: center;
+        .about-content {
+          line-height: 1.8;
+          font-size: 1.05rem;
+          color: #555;
         }
 
-        .skill-tag {
-          background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-          color: white;
-          padding: 0.75rem 1.5rem;
-          border-radius: 25px;
+        .about-content p {
+          margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+          color: var(--primary-color);
           font-weight: 600;
-          font-size: 0.95rem;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
-        }
-
-        .skill-tag:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
         @media (max-width: 768px) {
@@ -71,23 +59,35 @@ class SkillsSection extends HTMLElement {
             font-size: 2rem;
           }
 
-          .skill-tag {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
+          .about-content {
+            font-size: 1rem;
           }
         }
       </style>
 
-      <section id="skills" data-aos="zoom-in">
-        <h2>Technical Skills</h2>
-        <div class="skills-container">
-          ${skillsHTML}
+      <section id="about" class="section-card" data-aos="fade-right">
+        <h2>About Me</h2>
+        <div class="about-content">
+          <p>
+            <span class="highlight">QA Lead & Technology Governance</span> professional with 15+ years of experience 
+            in fintech, cloud, and enterprise systems. I specialize in ETL data validation, risk-based testing, 
+            AWS cloud solutions, and establishing robust governance frameworks.
+          </p>
+          <p>
+            With a passion for quality excellence, I've led high-impact QA initiatives across enterprise payment 
+            systems, cloud migrations, and fintech platforms. My expertise spans automation, CI/CD pipelines, 
+            data integrity, and compliance frameworks including GDPR.
+          </p>
+          <p>
+            I'm driven by a commitment to <span class="highlight">zero-defect delivery</span> and continuous improvement, 
+            building scalable testing frameworks that align with business objectives and stakeholder expectations.
+          </p>
         </div>
       </section>
     `;
 
-    this.shadowRoot.innerHTML = template;
-  }
+        this.shadowRoot.innerHTML = template;
+    }
 }
 
-customElements.define('skills-section', SkillsSection);
+customElements.define('about-section', AboutSection);
