@@ -4,20 +4,22 @@
  */
 
 class ContactSection extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.emailInitialized = false;
-  }
+    constructor() {
+        super();
+        this.attachShadow({
+            mode: 'open'
+        });
+        this.emailInitialized = false;
+    }
 
-  connectedCallback() {
-    this.render();
-    this.setupEventListeners();
-    this.initializeEmailJS();
-  }
+    connectedCallback() {
+        this.render();
+        this.setupEventListeners();
+        this.initializeEmailJS();
+    }
 
-  render() {
-    const template = `
+    render() {
+        const template = `
       <style>
         :host {
           --primary-color: #667eea;
@@ -149,7 +151,7 @@ class ContactSection extends HTMLElement {
         }
       </style>
 
-      <section id="contact" data-aos="fade-left">
+      <section id="contact" class="section-card" data-aos="fade-up" data-aos-delay="300">
         <h2>Get In Touch</h2>
         <div class="form-container">
           <form id="contact-form">
@@ -172,116 +174,116 @@ class ContactSection extends HTMLElement {
       </section>
     `;
 
-    this.shadowRoot.innerHTML = template;
-  }
-
-  setupEventListeners() {
-    const form = this.shadowRoot.querySelector('#contact-form');
-    
-    form.addEventListener('submit', (e) => this.handleFormSubmit(e));
-    
-    // Add real-time validation
-    form.querySelectorAll('input, textarea').forEach(field => {
-      field.addEventListener('blur', () => this.validateField(field));
-    });
-  }
-
-  validateField(field) {
-    const fieldName = field.name;
-    const value = field.value.trim();
-    const errorContainer = field.parentElement.querySelector('.error-text');
-    let isValid = true;
-
-    if (!Sanitizer.isValidField(value, 1)) {
-      errorContainer.textContent = CONSTANTS.MESSAGES.VALIDATION.FIELD_REQUIRED;
-      isValid = false;
-    } else if (fieldName === 'email' && !Sanitizer.isValidEmail(value)) {
-      errorContainer.textContent = CONSTANTS.MESSAGES.VALIDATION.INVALID_EMAIL;
-      isValid = false;
-    } else if (fieldName === 'message' && value.length < 10) {
-      errorContainer.textContent = 'Message must be at least 10 characters';
-      isValid = false;
+        this.shadowRoot.innerHTML = template;
     }
 
-    if (isValid) {
-      errorContainer.classList.remove('show');
-      field.classList.remove('error');
-    } else {
-      errorContainer.classList.add('show');
-      field.classList.add('error');
+    setupEventListeners() {
+        const form = this.shadowRoot.querySelector('#contact-form');
+
+        form.addEventListener('submit', (e) => this.handleFormSubmit(e));
+
+        // Add real-time validation
+        form.querySelectorAll('input, textarea').forEach(field => {
+            field.addEventListener('blur', () => this.validateField(field));
+        });
     }
 
-    return isValid;
-  }
+    validateField(field) {
+        const fieldName = field.name;
+        const value = field.value.trim();
+        const errorContainer = field.parentElement.querySelector('.error-text');
+        let isValid = true;
 
-  validateForm() {
-    const form = this.shadowRoot.querySelector('#contact-form');
-    const fields = form.querySelectorAll('input, textarea');
-    let isFormValid = true;
+        if (!Sanitizer.isValidField(value, 1)) {
+            errorContainer.textContent = CONSTANTS.MESSAGES.VALIDATION.FIELD_REQUIRED;
+            isValid = false;
+        } else if (fieldName === 'email' && !Sanitizer.isValidEmail(value)) {
+            errorContainer.textContent = CONSTANTS.MESSAGES.VALIDATION.INVALID_EMAIL;
+            isValid = false;
+        } else if (fieldName === 'message' && value.length < 10) {
+            errorContainer.textContent = 'Message must be at least 10 characters';
+            isValid = false;
+        }
 
-    fields.forEach(field => {
-      if (!this.validateField(field)) {
-        isFormValid = false;
-      }
-    });
+        if (isValid) {
+            errorContainer.classList.remove('show');
+            field.classList.remove('error');
+        } else {
+            errorContainer.classList.add('show');
+            field.classList.add('error');
+        }
 
-    return isFormValid;
-  }
-
-  initializeEmailJS() {
-    if (typeof emailjs !== 'undefined' && !this.emailInitialized) {
-      emailjs.init(CONSTANTS.EMAILJS.PUBLIC_KEY);
-      this.emailInitialized = true;
-    }
-  }
-
-  async handleFormSubmit(e) {
-    e.preventDefault();
-
-    if (!this.validateForm()) {
-      this.showStatus(CONSTANTS.MESSAGES.FORM.VALIDATION_ERROR, 'error');
-      return;
+        return isValid;
     }
 
-    const form = this.shadowRoot.querySelector('#contact-form');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const statusDiv = this.shadowRoot.querySelector('#status');
+    validateForm() {
+        const form = this.shadowRoot.querySelector('#contact-form');
+        const fields = form.querySelectorAll('input, textarea');
+        let isFormValid = true;
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
+        fields.forEach(field => {
+            if (!this.validateField(field)) {
+                isFormValid = false;
+            }
+        });
 
-    try {
-      if (typeof emailjs !== 'undefined') {
-        await emailjs.sendForm(
-          CONSTANTS.EMAILJS.SERVICE_ID,
-          CONSTANTS.EMAILJS.TEMPLATE_ID,
-          form,
-          CONSTANTS.EMAILJS.PUBLIC_KEY
-        );
-        
-        this.showStatus(CONSTANTS.MESSAGES.FORM.SUCCESS, 'success');
-        form.reset();
-      } else {
-        throw new Error('EmailJS not initialized');
-      }
-    } catch (error) {
-      console.error('Email error:', error);
-      this.showStatus(CONSTANTS.MESSAGES.FORM.ERROR, 'error');
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message';
+        return isFormValid;
     }
-  }
 
-  showStatus(message, type) {
-    const statusDiv = this.shadowRoot.querySelector('#status');
-    statusDiv.textContent = message;
-    statusDiv.className = `status-message ${type}`;
-    
-    setTimeout(() => {
-      statusDiv.className = 'status-message';
-    }, 5000);
-  }
+    initializeEmailJS() {
+        if (typeof emailjs !== 'undefined' && !this.emailInitialized) {
+            emailjs.init(CONSTANTS.EMAILJS.PUBLIC_KEY);
+            this.emailInitialized = true;
+        }
+    }
+
+    async handleFormSubmit(e) {
+        e.preventDefault();
+
+        if (!this.validateForm()) {
+            this.showStatus(CONSTANTS.MESSAGES.FORM.VALIDATION_ERROR, 'error');
+            return;
+        }
+
+        const form = this.shadowRoot.querySelector('#contact-form');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const statusDiv = this.shadowRoot.querySelector('#status');
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        try {
+            if (typeof emailjs !== 'undefined') {
+                await emailjs.sendForm(
+                    CONSTANTS.EMAILJS.SERVICE_ID,
+                    CONSTANTS.EMAILJS.TEMPLATE_ID,
+                    form,
+                    CONSTANTS.EMAILJS.PUBLIC_KEY
+                );
+
+                this.showStatus(CONSTANTS.MESSAGES.FORM.SUCCESS, 'success');
+                form.reset();
+            } else {
+                throw new Error('EmailJS not initialized');
+            }
+        } catch (error) {
+            console.error('Email error:', error);
+            this.showStatus(CONSTANTS.MESSAGES.FORM.ERROR, 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        }
+    }
+
+    showStatus(message, type) {
+        const statusDiv = this.shadowRoot.querySelector('#status');
+        statusDiv.textContent = message;
+        statusDiv.className = `status-message ${type}`;
+
+        setTimeout(() => {
+            statusDiv.className = 'status-message';
+        }, 5000);
+    }
 }
 
 customElements.define('contact-section', ContactSection);
