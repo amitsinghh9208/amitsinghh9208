@@ -161,7 +161,7 @@
           <a href="#contact" class="btn primary">Get In Touch</a>
           <a href="#projects" class="btn secondary">My Work</a>
           <!-- Download Resume Button -->
-          <a href="assets/Finance_26.pdf" id="downloadCV" class="btn primary" download> Download CV</a>
+          <a href="assets/Finance_26.pdf" id="downloadCV" class="btn primary" download> downloadCV</a>
         </div>
       </div>
     </section>
@@ -261,9 +261,41 @@
       </form>
       <p id="status"></p>
     </section>
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-script.js?v=3script>
-</body>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js?v=2"></script>
+    <script>
+      // Typing animation
+      new Typed("#typing", {
+        strings: ["Software Professional", "Lead QA Analyst", "Aspiring Architect"],
+        typeSpeed: 60,
+        backSpeed: 30,
+        loop: true
+      });
+      // AOS animation
+      AOS.init({
+        duration: 1000,
+        once: true
+      });
+    </script>
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      (function() {
+        emailjs.init("J2cBgjw4s8J3_DlZZ");
+      })();
+    </script>
+    <script>
+      // Contact form submit
+      document.getElementById("contact-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+        emailjs.sendForm("service_t92ua1s", "template_pbtfazg", this).then(function() {
+          document.getElementById("status").innerText = "Message sent successfully ✅";
+        }, function(error) {
+          document.getElementById("status").innerText = "Failed to send ❌";
+        });
+      });
+    </script>
+  </body>
 </html>
