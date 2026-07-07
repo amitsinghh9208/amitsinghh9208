@@ -242,58 +242,189 @@ window.onload = function () {
 };
 
 // Wait until page loads
+"use strict";
+
+/**
+ * Portfolio Site Script
+ * Handles theme toggle, smooth scrolling, typing animation,
+ * AOS animation, contact form validation.
+ */
+
 document.addEventListener("DOMContentLoaded", function () {
-
-    // Typing animation
-    if (document.getElementById("typing")) {
-      var typed = new Typed("#typing", {
-          strings: [
-              "Software Professional",
-              "Lead QA Analyst",
-              "Aspiring Architect"
-          ],
-          typeSpeed: 60,
-          backSpeed: 30,
-          loop: true
-      });
-    }
-
-    // Initialize AOS
-    if (typeof AOS !== 'undefined') {
-      AOS.init({
-          duration: 1000,
-          once: true
-      });
-    }
-
-    console.log("Portfolio loaded ✅");
-
-    // Resume download tracking
-    const resumeBtn = document.getElementById("downloadCV");
-
-    if (resumeBtn) {
-        resumeBtn.addEventListener("click", function () {
-            console.log("Resume download started ✅");
-        });
-    }
-
-    // Contact form
-    const contactForm = document.getElementById("contact-form");
-    if (contactForm) {
-      contactForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          if (typeof emailjs !== 'undefined') {
-            emailjs.sendForm("service_t92ua1s", "template_pbtfazg", this)
-                .then(function () {
-                    document.getElementById("status").innerText =
-                        "Message sent successfully ✅";
-                }, function (error) {
-                    document.getElementById("status").innerText =
-                        "Failed to send ❌";
-                });
-          }
-      });
-    }
-
+  initThemeToggle();
+  initSmoothScroll();
+  initTypingAnimation();
+  initAOS();
+  initEmailJS();
+  initContactForm();
 });
+
+/**
+ * Theme Toggle
+ */
+function initThemeToggle() {
+  const themeToggle = document.getElementById("themeToggle");
+
+  const savedTheme = localStorage.getItem("theme") || "light";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+
+  if (!themeToggle) return;
+
+  themeToggle.addEventListener("click", function () {
+    const currentTheme =
+      document.documentElement.getAttribute("data-theme") || "light";
+
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    localStorage.setItem("theme", nextTheme);
+  });
+}
+
+/**
+ * Smooth Scroll for internal anchor links
+ */
+function initSmoothScroll() {
+  document.addEventListener("click", function (event) {
+    const link = event.target.closest('a[href^="#"]');
+
+    if (!link) return;
+
+    const targetId = link.getAttribute("href");
+
+    if (!targetId || targetId === "#") return;
+
+    const targetElement = document.querySelector(targetId);
+
+    if (!targetElement) return;
+
+    event.preventDefault();
+
+    targetElement.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    history.pushState(null, "", targetId);
+  });
+}
+
+/**
+ * Typing Animation
+ */
+function initTypingAnimation() {
+  const typingElement = document.getElementById("typing");
+
+  if (!typingElement || typeof Typed === "undefined") return;
+
+  new Typed("#typing", {
+    strings: [
+      "Software Professional",
+      "Lead QA Analyst",
+      "Aspiring Architect"
+    ],
+    typeSpeed: 60,
+    backSpeed: 30,
+    loop: true
+  });
+}
+
+/**
+ * AOS Animation
+ */
+function initAOS() {
+  if (typeof AOS === "undefined") return;
+
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+}
+
+/**
+ * Restrict allowed.
+ */
+function initEmailJS() {
+  if (typeof emailjs === "undefined") return;
+
+  emailjs.init("J2cBgjw4s8J3_DlZZ");
+}
+
+/**
+ * Contact Form
+ */
+function initContactForm() {
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("status");
+
+  if (!form || !status) return;
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const name = form.elements["name"]?.value.trim() || "";
+    const email = form.elements["email"]?.value.trim() || "";
+    const message = form.elements["message"]?.value.trim() || "";
+
+    if (!isValidName(name)) {
+      setStatus(status, "Please enter a valid name.", "error");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setStatus(status, "Please enter a valid email address.", "error");
+      return;
+    }
+
+    if (!isValidMessage(message)) {
+      setStatus(status, "Message must be at least 10 characters.", "error");
+      return;
+    }
+
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    try {
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
+
+      if (typeof emailjs === "undefined") {
+        throw new Error("EmailJS is not loaded.");
+      }
+
+      await emailjs.sendForm("service_t92ua1s", "template_pbtfazg", form);
+
+      setStatus(status, "Message sent successfully ✅", "success");
+      form.reset();
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setStatus(status, "Failed to send message. Please try again later.", "error");
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Send Message";
+      }
+    }
+  });
+}
+
+/**
+ * Validation Helpers
+ */
+function isValidName(name) {
+  return /^[a-zA-Z\s.'-]{2,60}$/.test(name);
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+function isValidMessage(message) {
+  return message.length >= 10 && message.length <= 1000;
+}
+
+function setStatus(statusElement, message, type) {
+  statusElement.textContent = message;
+  statusElement.className = type === "success" ? "success" : "error";
+}
