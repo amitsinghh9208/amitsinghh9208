@@ -285,14 +285,14 @@
       <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
       <script>
          (function() {
-           emailjs.init("J2cBgjw4s8J3_DlZZ");
+           emailjs.init(CONSTANTS.EMAILJS.PUBLIC_KEY);
          })();
       </script>
       <script>
          // Contact form submit
          document.getElementById("contact-form").addEventListener("submit", function(e) {
            e.preventDefault();
-           emailjs.sendForm("service_t92ua1s", "template_pbtfazg", this).then(function() {
+           emailjs.sendForm(CONSTANTS.EMAILJS.SERVICE_ID, CONSTANTS.EMAILJS.TEMPLATE_ID, this).then(function() {
              document.getElementById("status").innerText = "Message sent successfully ✅";
            }, function(error) {
              document.getElementById("status").innerText = "Failed to send ❌";
