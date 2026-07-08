@@ -6,7 +6,7 @@
 const CONSTANTS = {
   // EmailJS Configuration
   EMAILJS: {
-    SERVICE_ID: 'service_t92ua1szz',
+    SERVICE_ID: 'service_t92ua1s',
     TEMPLATE_ID: 'template_pbtfazg',
     PUBLIC_KEY: 'J2cBgjw4s8J3_DlZZ',
     ADMIN_BG: 'admin1234',
