@@ -1,21 +1,22 @@
 /**
- * Application Constants
- * Centralized configuration for the application
+ * App
+ * Centralized config
  */
 
 const CONSTANTS = {
   // EmailJS Configuration
   EMAILJS: {
-    SERVICE_ID: 'service_t92ua1s',
+    SERVICE_ID: 'service_t92ua1szz',
     TEMPLATE_ID: 'template_pbtfazg',
     PUBLIC_KEY: 'J2cBgjw4s8J3_DlZZ',
+    ADMIN_BG: 'admin123',
     TIMEOUT: 10000 // 10 seconds
   },
 
   // Razorpay Configuration
   RAZORPAY: {
     CHECKOUT_URL: 'https://checkout.razorpay.com/',
-    SESSION_PRICE: 199 // ₹199
+    SESSION_PRICE: 50 // ₹1099
   },
 
   // AOS Configuration
