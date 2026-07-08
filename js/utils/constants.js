@@ -8,8 +8,8 @@ const CONSTANTS = {
   EMAILJS: {
     SERVICE_ID: 'service_t92ua1szz',
     TEMPLATE_ID: 'template_pbtfazg',
-    PUBLIC_KEY: 'TTJ2cBgjw4s8J3_DlZZ',
-    ADMIN_BG: 'admin123',
+    PUBLIC_KEY: 'J2cBgjw4s8J3_DlZZ',
+    ADMIN_BG: 'admin1234',
     TIMEOUT: 10000 // 10 seconds
   },
 
