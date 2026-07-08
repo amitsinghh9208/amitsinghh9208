@@ -124,7 +124,7 @@ function loginAsOwner() {
   const password = prompt('Enter owner password:');
   if (password) {
     // Simple password check (in production, use proper authentication)
-    if (password === CONSTANTS.EMAILJS.ADMIN_BG) { // Change this to secure method
+    if (password === 'admin123') { // Change this to secure method
       localStorage.setItem('isOwner', 'true');
       currentUser = OWNER_USERNAME;
       setupOwnerControls();
@@ -347,7 +347,7 @@ function initAOS() {
 function initEmailJS() {
   if (typeof emailjs === "undefined") return;
 
-  emailjs.init(CONSTANTS.EMAILJS.PUBLIC_KEY);
+  emailjs.init('J2cBgjw4s8J3_DlZZ');
 }
 
 /**
@@ -393,7 +393,7 @@ function initContactForm() {
         throw new Error("EmailJS is not loaded.");
       }
 
-      await emailjs.sendForm(CONSTANTS.EMAILJS.SERVICE_ID, CONSTANTS.EMAILJS.TEMPLATE_ID, form);
+      await emailjs.sendForm('service_t92ua1s', 'template_pbtfazg', form);
 
       setStatus(status, "Message sent successfully ✅", "success");
       form.reset();
